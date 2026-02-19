@@ -1,22 +1,27 @@
 #include <Servo.h>
-#include <Time.h>
 
-Servo myServo; // Create servo object
+Servo myServo;
 
 const int servoPin = 8;
-const int runTime = 1000; // 1 second
-const int cwSpeed = 180;
-const int stopSpeed = 95;
+
+// USER VARIABLES
+int runTime = 2000;     // milliseconds
+int speedValue = 180;   // 0–180 for CW, -180-0 for CCW
+int stopValue = 95;     // calibrated stop value, (may need to adjust)
 
 void setup() {
-  myServo.attach(servoPin); // Attaches the servo on pin 8
-  
-  // The code inside setup() runs once
-  myServo.write(cwSpeed); // Start CW at max speed
-  delay(runTime);         // Run for the set time
-  myServo.write(stopSpeed); // Stop
+  myServo.attach(servoPin);
+
+  runServo(speedValue, runTime);
+
+  myServo.write(stopValue);  // ensure stop
 }
 
 void loop() {
-  // This loop is intentionally empty if the goal is to stop forever after setup()
+  // empty, doesn't loop
 }
+
+void runServo(int speedCmd, int durationMs) {
+  myServo.write(speedCmd);
+  delay(durationMs);
+} // creates custom function used in the void setup()
