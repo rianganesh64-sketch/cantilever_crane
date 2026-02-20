@@ -7,7 +7,7 @@ const int servoPin = 8;
 // USER VARIABLES
 int runTime = 2000;     // milliseconds
 int speedValue = 180;   // 0–180 for CW, -180-0 for CCW
-int stopValue = 95;     // calibrated stop value, (may need to adjust)
+int stopValue = 27.5;     // calibrated stop value, (27.5 is the current value)
 
 void setup() {
   myServo.attach(servoPin);
