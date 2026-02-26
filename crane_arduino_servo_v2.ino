@@ -5,9 +5,11 @@ Servo myServo;
 const int servoPin = 8;
 Servo myservo;
 
+
+
 //USER VARIABLES
 int runTime = 500000;     // milliseconds
-int speedValue = 0;   // 0 is down, 180 is up
+int speedValue = 180;   // 180 is down, 0 is up
 int stopValue = 90;     // calibrated stop value, (90 is current value)
 
 void setup() {
@@ -17,6 +19,7 @@ void setup() {
 
   myServo.write(stopValue);  // ensure stop
 }
+
 
 void loop() {
   // empty, doesn't loop
