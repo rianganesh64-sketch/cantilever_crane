@@ -7,8 +7,8 @@ int runFlag = 0; // start state at 0
 // Variables
 int speedValue = 180;       // 180 is down, 0 is up
 int stopValue = 90;         // calibrated stop position
-const float secondsPerMeter = 8.04; // assumes that 1 meter at max speed = 8.04 secs
-float metersPerRun = 1; // distance want to go (meters)
+const float secondsPerMeter = 6.67; // assumes that 1 meter at max speed = 8.04 secs
+float metersPerRun = 6.02; // distance want to go (meters)
 
 void setup() {
   myServo.attach(servoPin);
