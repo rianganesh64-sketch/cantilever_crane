@@ -6,37 +6,49 @@ int runFlag = 0; // start state at 0
 
 // Variables
 int speedValue = 180;       // 180 is down, 0 is up (180 IS ONE WAY, 0 IS THE OTHER WAY)
-int stopValue = 90;         // calibrated stop position, (DONT ADJUST)
-const float secondsPerMeter = 6.67; // assumes that 1 meter at max speed = 6.67;
-float metersPerRun = 8.7; // distance want to go (meters) (THIS IS WHAT YOU CHANGE FOR RUNTIME)
+int stopValue = 90;         // calibrated stop position (default stop)
+int stopCommand;            // variable stop value depending on mass
+const float secondsPerMeter = 6.67; // assumes that 1 meter at max speed = 6.67
+float metersPerRun = 8.7; // distance want to go (meters)
+float addedMass = 1.5; // input added mass
+int massStop = 75; // the stop value based on the mass, (WILL NEED TO CALIBRATE FOR EACH MASS)
 
 void setup() {
   myServo.attach(servoPin);
-  myServo.write(stopValue); // Start in stopped position
+
+  // Determine stop command based on added mass
+  if (addedMass > 1) {
+    stopCommand = massStop;
+  } else {
+    stopCommand = stopValue;
+  }
+
+  myServo.write(stopCommand); // Start stopped
   
   pinMode(buttonPin, INPUT_PULLUP);
-  runFlag = 0; //Flag starts at zero, not moving
+  runFlag = 0;
 }
 
 void loop() {
 
   if (digitalRead(buttonPin) == LOW) {
-    delay(50); // debouncing to prevent double click errors
-    runFlag = 1; // when button pressed, Flag goes to 1
+    delay(50); // debouncing
+    runFlag = 1;
   }
 
   if (runFlag == 1) {
-    // Distance (m) -> time (ms): timeMs = meters * (metersPerRun sec/m) * (1000 ms/sec)
+
+    // Distance (m) -> time (ms)
     int runTimeMs = (int)(metersPerRun * secondsPerMeter * 1000.0);
 
-    runServo(speedValue, runTimeMs); //if Flag=1, run motor
+    runServo(speedValue, runTimeMs); // run motor
     
-    myServo.write(stopValue); // stopping servo
-    runFlag = 0;              // Reset so it waits for next press
+    myServo.write(stopCommand); // stop depending on mass
+    runFlag = 0;
   }
 }
 
 void runServo(int speedCmd, int durationMs) {
   myServo.write(speedCmd);
-  delay(durationMs); // keeps servo moving for set duration
-} //custom function
+  delay(durationMs);
+}
