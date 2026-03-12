@@ -7,8 +7,8 @@ int runFlag = 0; // start state at 0
 // Variables
 int speedValue = 180;       // 180 is up, 0 is down (180 IS ONE WAY, 0 IS THE OTHER WAY)
 int stopValue = 90;         // calibrated stop position, (DONT ADJUST)
-const float secondsPerMeter = 6.67; // assumes that 1 meter at max speed = 6.67;
-float metersPerRun = 10; // distance want to go (meters) (THIS IS WHAT YOU CHANGE FOR RUNTIME) 1.345
+const float secondsPerMeter = 4.125; // assumes that 1 meter at max speed = 6.67;
+float metersPerRun = 8.89; // distance want to go (meters) (THIS IS WHAT YOU CHANGE FOR RUNTIME)
 
 void setup() {
   myServo.attach(servoPin);
