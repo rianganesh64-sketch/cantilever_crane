@@ -5,10 +5,10 @@ const int buttonPin = 8; //button pin on arduino
 int runFlag = 0; // start state at 0
 
 // Variables
-int speedValue = 180;       // 180 is up, 0 is down (180 IS ONE WAY, 0 IS THE OTHER WAY)
+int speedValue = 0;       // 180 is up, 0 is down (180 IS ONE WAY, 0 IS THE OTHER WAY)
 int stopValue = 90;         // calibrated stop position, (DONT ADJUST)
-const float secondsPerMeter = 4.125; // assumes that 1 meter at max speed = 6.67;
-float metersPerRun = 8.89; // distance want to go (meters) (THIS IS WHAT YOU CHANGE FOR RUNTIME)
+const float secondsPerMeter = 3.654; // assumes that 1 meter at max speed = 6.67;
+float metersPerRun = 5; // CHANGE THIS NUMBER distance want to go (meters) (THIS IS WHAT YOU CHANGE FOR RUNTIME)
 
 void setup() {
   myServo.attach(servoPin);
@@ -31,7 +31,7 @@ void loop() {
 
     runServo(speedValue, runTimeMs); //if Flag=1, run motor
 
-    myServo.write(stopValue); // stopping servo
+    myServo.write(180); // stopping servo
     runFlag = 0;              // Reset so it waits for next press
   }
 }
