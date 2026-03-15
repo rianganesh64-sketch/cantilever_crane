@@ -5,11 +5,10 @@ const int buttonPin = 8; //button pin on arduino
 int runFlag = 0; // start state at 0
 
 // Variables
-int speedValue = 0;       // 180 is up, 0 is down (180 IS ONE WAY, 0 IS THE OTHER WAY)
-int stopValue = 90;         // calibrated stop position, (DONT ADJUST)
-const float secondsPerMeter = 3.654; // assumes that 1 meter at max speed = 6.67;
-float metersPerRun = 1; // CHANGE THIS NUMBER distance want to go (meters) (THIS IS WHAT YOU CHANGE FOR RUNTIME)
-
+int speedValue = 0;       // 180 is up, 0 is down
+int stopValue = 90;         // calibrated stop position
+const float secondsPerMeter = 3.654; // calibrate for each mass value
+float metersPerRun = 1; // distance want to go (meters)
 void setup() {
   myServo.attach(servoPin);
   myServo.write(stopValue); // Start in stopped position
@@ -31,7 +30,7 @@ void loop() {
 
     runServo(speedValue, runTimeMs); //if Flag=1, run motor
 
-    myServo.write(180); // stopping servo
+    myServo.write(180); // stopping servo, 180 if countertorque applied
     runFlag = 0;              // Reset so it waits for next press
   }
 }
